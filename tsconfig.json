@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./server", //compile all ts files to ./server
+    "lib": [ "es2015" ],
+    "removeComments": true,
+    "pretty": true //pretty error messages
+  },
+  "include": ["serverSrc/**/*"],
+  "exclude": [
+    "node_modules"
+  ]
+
+}

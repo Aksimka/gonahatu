@@ -1,0 +1,23 @@
+{
+  "name": "gonahatuDocker",
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/mongodb": "^3.1.28",
+    "@types/node": "^12.6.8",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-cors": "^0.0.16",
+    "koa-morgan": "^1.0.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.6.5",
+    "nodemon": "^1.19.1",
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "tsc": "tsc -w",
+    "serve": "nodemon server/index.js",
+    "start": "node server/index.js"
+  }
+}

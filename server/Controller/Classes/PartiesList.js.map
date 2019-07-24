@@ -1,0 +1,1 @@
+{"version":3,"file":"PartiesList.js","sourceRoot":"","sources":["../../../serverSrc/Controller/Classes/PartiesList.ts"],"names":[],"mappings":";;AACA,0DAAqD;AAGrD,MAAa,WAAW;IACpB;IAEA,CAAC;IACD,MAAM,CAAC,aAAa;QAChB,OAAO,yBAAW,CAAC,IAAI,CAAC,EAAE,CAAC,CAAC;IAChC,CAAC;IACD,MAAM,CAAC,cAAc;IAErB,CAAC;CAEJ;AAXD,kCAWC"}
