@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 var cors = require('koa-cors');
 const router = new Router();
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost/gonahatu', { useNewUrlParser: true }).then((res) => {
+mongoose.connect('mongodb+srv://root:root@honahatu-oszqx.mongodb.net/parties?retryWrites=true&w=majority', { useNewUrlParser: true }).then((res) => {
     console.log('Connection is successful');
 }).catch((e) => {
     throw new Error(e);
