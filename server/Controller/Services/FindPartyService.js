@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
+const PartySchema_1 = require("../../Models/PartySchema");
 class FindPartyService {
     static findPartyById(id) {
         return 0;
@@ -40,9 +41,14 @@ class FindPartyService {
                     obj[`${j.field}`] = j.eq;
                     orQuery.push(obj);
                 }
-                if (j.field && j.like && typeof j.like === 'string') {
+                else if (j.field && j.like && typeof j.like === 'string') {
                     let obj = {};
                     obj[`${j.field}`] = new RegExp('^' + j.like + '$', "i");
+                    orQuery.push(obj);
+                }
+                else if (j.field && j.gte && typeof j.gte !== 'string') {
+                    let obj = {};
+                    obj[`${j.field}`] = new RegExp('^' + j.gte + '$', "i");
                     orQuery.push(obj);
                 }
                 else {
@@ -79,6 +85,9 @@ class FindPartyService {
         });
         findPartiesByFieldsQuery.sort(sortQuery);
         return await findPartiesByFieldsQuery.exec();
+    }
+    static async findPartyBuId(id) {
+        return await PartySchema_1.PartySchema.find({ id: id });
     }
 }
 exports.FindPartyService = FindPartyService;
