@@ -6,6 +6,20 @@ const PartiesList_1 = require("../../../Controller/Classes/PartiesList");
 const FindPartyService_1 = require("../../../Controller/Services/FindPartyService");
 const Map_1 = require("../../../Controller/Classes/Map");
 const PartiesRouter = new Partiesrouter({ prefix: '/api/parties' });
+PartiesRouter.get('/all', async (ctx, next) => {
+    ctx.body = await PartiesList_1.PartiesList.getAllParties();
+});
+PartiesRouter.get('/party/:id', async (ctx, next) => {
+    let id = ctx.params.id;
+    let party = await FindPartyService_1.FindPartyService.findPartyById(id);
+    if (party && party[0]) {
+        ctx.body = party[0];
+    }
+    else {
+        ctx.body = "No data";
+        ctx.response.status = 404;
+    }
+});
 PartiesRouter.post('/search', async (ctx, next) => {
     let offset = ctx.request.body.offset || null;
     let limit = ctx.request.body.limit || null;
@@ -18,19 +32,6 @@ PartiesRouter.post('/search', async (ctx, next) => {
         ctx.body = `Error: /n ${e}`;
     }
     ctx.body = 'search /api/parties here';
-});
-PartiesRouter.get('/all', async (ctx, next) => {
-    ctx.body = await PartiesList_1.PartiesList.getAllParties();
-});
-PartiesRouter.get('/party/:id', async (ctx, next) => {
-    let id = ctx.params.id;
-    let party = await FindPartyService_1.FindPartyService.findPartyBuId(id);
-    if (party) {
-        ctx.body = party[0];
-    }
-    else {
-        ctx.body = 'vlad lox';
-    }
 });
 PartiesRouter.post('/newParty', async (ctx, next) => {
     console.log(ctx.request.body);

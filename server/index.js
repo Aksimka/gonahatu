@@ -19,7 +19,7 @@ const app = new Koa();
 app.use(koaBody());
 app.use(logger('combined'));
 router.get('/', async (ctx) => {
-    ctx.body = '/ is here';
+    ctx.body = ctx;
 });
 app.use(cors({}));
 app.use(router.routes());

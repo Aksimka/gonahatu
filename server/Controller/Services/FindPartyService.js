@@ -3,9 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const PartySchema_1 = require("../../Models/PartySchema");
 class FindPartyService {
-    static findPartyById(id) {
-        return 0;
-    }
     static async findPartiesByFields(_offset = 0, _limit = 15, _conditions, _orderBy = [{ decrease: 'publicationDate' }]) {
         let offset = _offset || null;
         let limit = _limit || null;
@@ -86,7 +83,7 @@ class FindPartyService {
         findPartiesByFieldsQuery.sort(sortQuery);
         return await findPartiesByFieldsQuery.exec();
     }
-    static async findPartyBuId(id) {
+    static async findPartyById(id) {
         try {
             return await PartySchema_1.PartySchema.find({ id: id });
         }
