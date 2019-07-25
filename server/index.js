@@ -28,7 +28,7 @@ app.use(apiRouter.routes());
 app.use(apiRouter.allowedMethods());
 app.use(partiesRouter.routes());
 app.use(partiesRouter.allowedMethods());
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
     console.log('server listening on http://localhost:3000');
 });
 //# sourceMappingURL=index.js.map
