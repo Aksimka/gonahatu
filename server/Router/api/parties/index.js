@@ -22,7 +22,7 @@ PartiesRouter.post('/search', async (ctx, next) => {
 PartiesRouter.get('/all', async (ctx, next) => {
     ctx.body = await PartiesList_1.PartiesList.getAllParties();
 });
-PartiesRouter.get('/:id', async (ctx, next) => {
+PartiesRouter.get('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
     ctx.body = await FindPartyService_1.FindPartyService.findPartyBuId(id);
 });
