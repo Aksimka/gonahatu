@@ -5,6 +5,7 @@ const logger = require("koa-morgan");
 const koaBody = require("koa-body");
 const Router = require("koa-router");
 const mongoose = require("mongoose");
+const PartiesList_1 = require("./Controller/Classes/PartiesList");
 var cors = require('koa-cors');
 const router = new Router();
 mongoose.set('useCreateIndex', true);
@@ -19,7 +20,22 @@ const app = new Koa();
 app.use(koaBody());
 app.use(logger('combined'));
 router.get('/', async (ctx) => {
-    ctx.body = '/ is here';
+    let pattern = {
+        "type": "FeatureCollection",
+        "features": []
+    };
+    let parties = await PartiesList_1.PartiesList.getAllParties();
+    parties.forEach(i => {
+        pattern.features.push({
+            "type": "Feature",
+            "properties": { "id": `${i.id}` },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [i.location[0], i.location[1]]
+            }
+        });
+    });
+    ctx.body = pattern;
 });
 app.use(cors({}));
 app.use(router.routes());

@@ -4,10 +4,10 @@ const PartySchema_1 = require("../../Models/PartySchema");
 class PartiesList {
     constructor() {
     }
-    static getAllParties() {
-        return PartySchema_1.PartySchema.find({});
+    static async getAllParties() {
+        return await PartySchema_1.PartySchema.find({});
     }
-    static getPartiesList() {
+    static async getPartiesList() {
     }
 }
 exports.PartiesList = PartiesList;

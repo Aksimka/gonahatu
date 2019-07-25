@@ -4,6 +4,7 @@ const Partiesrouter = require("koa-router");
 const Party_1 = require("../../../Controller/Classes/Party");
 const PartiesList_1 = require("../../../Controller/Classes/PartiesList");
 const FindPartyService_1 = require("../../../Controller/Services/FindPartyService");
+const Map_1 = require("../../../Controller/Classes/Map");
 const PartiesRouter = new Partiesrouter({ prefix: '/api/parties' });
 PartiesRouter.post('/search', async (ctx, next) => {
     let offset = ctx.request.body.offset || null;
@@ -32,6 +33,9 @@ PartiesRouter.post('/newParty', async (ctx, next) => {
     catch (e) {
         ctx.body = 'Doesn\'t added';
     }
+});
+PartiesRouter.get('/map', async (ctx, next) => {
+    ctx.body = await Map_1.Map.getPartiesPoints();
 });
 module.exports = PartiesRouter;
 //# sourceMappingURL=index.js.map
