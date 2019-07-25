@@ -32,15 +32,6 @@ PartiesRouter.get('/party/:id', async (ctx, next) => {
         ctx.body = 'vlad lox';
     }
 });
-PartiesRouter.put('/party/:id', async (ctx, next) => {
-    let id = ctx.params.id;
-    let body = ctx.request.body;
-    Party_1.Party.update(id, body).then(() => {
-        ctx.body = 'Successfully updated';
-    }).catch(e => {
-        ctx.body = e;
-    });
-});
 PartiesRouter.post('/newParty', async (ctx, next) => {
     console.log(ctx.request.body);
     let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate } = ctx.request.body;
@@ -52,6 +43,23 @@ PartiesRouter.post('/newParty', async (ctx, next) => {
     catch (e) {
         ctx.body = 'Doesn\'t added';
     }
+});
+PartiesRouter.put('/party/:id', async (ctx, next) => {
+    let id = ctx.params.id;
+    let body = ctx.request.body;
+    Party_1.Party.update(id, body).then(() => {
+        ctx.body = 'Successfully updated';
+    }).catch(e => {
+        ctx.body = e;
+    });
+});
+PartiesRouter.del('/party/:id', async (ctx, next) => {
+    let id = ctx.params.id;
+    Party_1.Party.delete(id).then(() => {
+        ctx.body = 'Successfully deleted';
+    }).catch(e => {
+        ctx.body = e;
+    });
 });
 PartiesRouter.get('/map', async (ctx, next) => {
     ctx.body = await Map_1.Map.getPartiesPoints();

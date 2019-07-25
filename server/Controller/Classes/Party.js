@@ -39,9 +39,16 @@ class Party {
         });
     }
     static async update(id, body) {
-        console.log(id, body);
         try {
             return await PartySchema_1.PartySchema.updateOne({ id }, body);
+        }
+        catch (e) {
+            return e;
+        }
+    }
+    static async delete(id) {
+        try {
+            return await PartySchema_1.PartySchema.findOneAndRemove({ id });
         }
         catch (e) {
             return e;
