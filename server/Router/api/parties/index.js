@@ -24,9 +24,9 @@ PartiesRouter.get('/all', async (ctx, next) => {
 });
 PartiesRouter.get('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
-    let party = await FindPartyService_1.FindPartyService.findPartyBuId(id)[0];
+    let party = await FindPartyService_1.FindPartyService.findPartyBuId(id);
     if (party) {
-        ctx.body = party;
+        ctx.body = party[0];
     }
     else {
         ctx.body = 'vlad lox';
