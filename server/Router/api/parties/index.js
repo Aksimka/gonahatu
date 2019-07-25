@@ -32,6 +32,15 @@ PartiesRouter.get('/party/:id', async (ctx, next) => {
         ctx.body = 'vlad lox';
     }
 });
+PartiesRouter.put('/party/:id', async (ctx, next) => {
+    let id = ctx.params.id;
+    let body = ctx.request.body;
+    Party_1.Party.update(id, body).then(() => {
+        ctx.body = 'Successfully updated';
+    }).catch(e => {
+        ctx.body = e;
+    });
+});
 PartiesRouter.post('/newParty', async (ctx, next) => {
     console.log(ctx.request.body);
     let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate } = ctx.request.body;

@@ -87,7 +87,12 @@ class FindPartyService {
         return await findPartiesByFieldsQuery.exec();
     }
     static async findPartyBuId(id) {
-        return await PartySchema_1.PartySchema.find({ id: id });
+        try {
+            return await PartySchema_1.PartySchema.find({ id: id });
+        }
+        catch (e) {
+            return 'Not updated';
+        }
     }
 }
 exports.FindPartyService = FindPartyService;

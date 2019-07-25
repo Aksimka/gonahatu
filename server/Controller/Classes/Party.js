@@ -38,6 +38,15 @@ class Party {
                 return 'Some error occurred';
         });
     }
+    static async update(id, body) {
+        console.log(id, body);
+        try {
+            return await PartySchema_1.PartySchema.updateOne({ id }, body);
+        }
+        catch (e) {
+            return e;
+        }
+    }
 }
 exports.Party = Party;
 //# sourceMappingURL=Party.js.map
