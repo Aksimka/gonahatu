@@ -30,6 +30,10 @@ app.use(apiRouter.allowedMethods());
 app.use(partiesRouter.routes());
 app.use(partiesRouter.allowedMethods());
 let io = sockets.listen(app);
+io.configure(function () {
+    io.set("transports", ["xhr-polling"]);
+    io.set("polling duration", 10);
+});
 io.sockets.on('connection', () => {
     console.log('sockets are connected');
 });
