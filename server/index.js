@@ -5,6 +5,7 @@ const logger = require("koa-morgan");
 const koaBody = require("koa-body");
 const Router = require("koa-router");
 const mongoose = require("mongoose");
+const sockets = require("socket.io");
 let cors = require('koa-cors');
 const router = new Router();
 mongoose.set('useCreateIndex', true);
@@ -28,6 +29,10 @@ app.use(apiRouter.routes());
 app.use(apiRouter.allowedMethods());
 app.use(partiesRouter.routes());
 app.use(partiesRouter.allowedMethods());
+let io = sockets.listen(app);
+io.sockets.on('connection', () => {
+    console.log('sockets are connected');
+});
 app.listen(process.env.PORT || 3000, function () {
     console.log(`server listening on http://localhost:${process.env.PORT || 3000}`);
 });

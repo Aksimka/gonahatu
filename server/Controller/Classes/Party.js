@@ -38,6 +38,14 @@ class Party {
                 return 'Some error occurred';
         });
     }
+    static async oneMoreMember(id) {
+        try {
+            return await PartySchema_1.PartySchema.update({ id }, { $inc: { peopleNow: 1 } });
+        }
+        catch (e) {
+            return e;
+        }
+    }
     static async update(id, body) {
         try {
             return await PartySchema_1.PartySchema.updateOne({ id }, body);
@@ -48,7 +56,7 @@ class Party {
     }
     static async delete(id) {
         try {
-            return await PartySchema_1.PartySchema.findOneAndRemove({ id });
+            return await PartySchema_1.PartySchema.findOneAndDelete({ id });
         }
         catch (e) {
             return e;

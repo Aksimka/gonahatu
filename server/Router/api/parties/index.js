@@ -48,11 +48,14 @@ PartiesRouter.post('/newParty', async (ctx, next) => {
 PartiesRouter.put('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
     let body = ctx.request.body;
-    Party_1.Party.update(id, body).then(() => {
-        ctx.body = 'Successfully updated';
-    }).catch(e => {
-        ctx.body = e;
-    });
+    let res = await Party_1.Party.update(id, body);
+    res.nModified ? ctx.body = 'Successfully' : ctx.response.status = 404;
+});
+PartiesRouter.put('/party/:id/newMember', async (ctx, next) => {
+    let id = ctx.params.id;
+    let res = await Party_1.Party.oneMoreMember(id);
+    res.nModified ? ctx.body = 'Successfully' : ctx.response.status = 404;
+    sockets.emit('message', 'You are connected!');
 });
 PartiesRouter.del('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
