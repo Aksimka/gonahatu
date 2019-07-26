@@ -5,7 +5,7 @@ const logger = require("koa-morgan");
 const koaBody = require("koa-body");
 const Router = require("koa-router");
 const mongoose = require("mongoose");
-const socketIO = require('socket.io');
+var WebSocketServer = require("ws").Server;
 let cors = require('koa-cors');
 const router = new Router();
 mongoose.set('useCreateIndex', true);
@@ -32,13 +32,16 @@ app.use(partiesRouter.allowedMethods());
 app.listen(process.env.PORT || 3000, function () {
     console.log(`server listening on http://localhost:${process.env.PORT || 3000}`);
 });
-const io = socketIO(app);
-io.configure(function () {
-    io.set("transports", ["xhr-polling"]);
-    io.set("polling duration", 10);
-});
-io.on('connection', (socket) => {
-    console.log('Client connected');
-    socket.on('disconnect', () => console.log('Client disconnected'));
+var wss = new WebSocketServer({ server: app });
+console.log("websocket server created");
+wss.on("connection", function (ws) {
+    var id = setInterval(function () {
+        ws.send(JSON.stringify(new Date()), function () { });
+    }, 1000);
+    console.log("websocket connection open");
+    ws.on("close", function () {
+        console.log("websocket connection close");
+        clearInterval(id);
+    });
 });
 //# sourceMappingURL=index.js.map
