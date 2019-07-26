@@ -33,9 +33,12 @@ app.listen(process.env.PORT || 3000, function () {
     console.log(`server listening on http://localhost:${process.env.PORT || 3000}`);
 });
 const io = socketIO(app);
+io.configure(function () {
+    io.set("transports", ["xhr-polling"]);
+    io.set("polling duration", 10);
+});
 io.on('connection', (socket) => {
     console.log('Client connected');
     socket.on('disconnect', () => console.log('Client disconnected'));
 });
-setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
 //# sourceMappingURL=index.js.map
