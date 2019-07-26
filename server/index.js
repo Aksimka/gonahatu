@@ -29,13 +29,10 @@ app.use(apiRouter.routes());
 app.use(apiRouter.allowedMethods());
 app.use(partiesRouter.routes());
 app.use(partiesRouter.allowedMethods());
-let io = sockets.listen(app);
-io.configure(function () {
-    io.set("transports", ["xhr-polling"]);
-    io.set("polling duration", 10);
-});
-io.sockets.on('connection', () => {
-    console.log('sockets are connected');
+const io = sockets(app);
+io.on('connection', (socket) => {
+    console.log('Client connected');
+    socket.on('disconnect', () => console.log('Client disconnected'));
 });
 app.listen(process.env.PORT || 3000, function () {
     console.log(`server listening on http://localhost:${process.env.PORT || 3000}`);
