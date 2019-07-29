@@ -41,7 +41,7 @@ PartiesRouter.post('/newParty', async (ctx, next) => {
         newParty.save();
         ctx.body = {
             party: newParty,
-            partyId: 'asd'
+            partyId: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         };
     }
     catch (e) {
