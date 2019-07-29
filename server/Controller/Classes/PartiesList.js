@@ -5,7 +5,7 @@ class PartiesList {
     constructor() {
     }
     static async getAllParties() {
-        return await PartySchema_1.PartySchema.find({});
+        return await PartySchema_1.PartySchema.find({}).sort({ publicationDate: -1 });
     }
     static async getPartiesList() {
     }
