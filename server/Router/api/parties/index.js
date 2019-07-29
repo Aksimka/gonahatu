@@ -61,11 +61,11 @@ PartiesRouter.put('/party/:id/newMember', async (ctx, next) => {
 });
 PartiesRouter.del('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
-    Party_1.Party.delete(id).then(() => {
-        ctx.body = 'Successfully deleted';
-    }).catch(e => {
-        ctx.body = e;
-    });
+    let res = await Party_1.Party.delete(id);
+    if (res.id = id) {
+        ctx.status = 200;
+        ctx.body = 'Succesfully deleted';
+    }
 });
 PartiesRouter.get('/map', async (ctx, next) => {
     ctx.body = await Map_1.Map.getPartiesPoints();
