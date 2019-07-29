@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const PartySchema_1 = require("../../Models/PartySchema");
 class Party {
-    constructor(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink) {
+    constructor(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate) {
         this.id = new Date().getTime() + 2;
         this.description = description;
         this.weWant = weWant;
@@ -16,7 +16,6 @@ class Party {
         this.location = location;
         this.images = images;
         this.publicationDate = publicationDate;
-        this.vkLink = vkLink;
     }
     save() {
         let newParty = new PartySchema_1.PartySchema({
@@ -32,8 +31,7 @@ class Party {
             ownerName: this.ownerName,
             location: this.location,
             images: this.images,
-            publicationDate: new Date().getTime(),
-            vkLink: this.vkLink
+            publicationDate: new Date().getTime()
         });
         newParty.save(function (err) {
             if (err)
