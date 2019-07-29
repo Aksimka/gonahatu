@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Partiesrouter = require("koa-router");
+let hash = require('object-hash');
 const Party_1 = require("../../../Controller/Classes/Party");
 const PartiesList_1 = require("../../../Controller/Classes/PartiesList");
 const FindPartyService_1 = require("../../../Controller/Services/FindPartyService");
@@ -35,11 +36,14 @@ PartiesRouter.post('/search', async (ctx, next) => {
 });
 PartiesRouter.post('/newParty', async (ctx, next) => {
     console.log(ctx.request.body);
-    let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate } = ctx.request.body;
-    let newParty = new Party_1.Party(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate);
+    let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink } = ctx.request.body;
+    let newParty = new Party_1.Party(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink);
     try {
         newParty.save();
-        ctx.body = 'new party created';
+        ctx.body = {
+            party: newParty,
+            key: hash(newParty)
+        };
     }
     catch (e) {
         ctx.body = 'Doesn\'t added';
