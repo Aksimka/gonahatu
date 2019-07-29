@@ -38,12 +38,11 @@ PartiesRouter.post('/newParty', async (ctx, next) => {
     console.log(ctx.request.body);
     let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink } = ctx.request.body;
     let newParty = new Party_1.Party(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink);
-    let str = randomString.generate();
     try {
         newParty.save();
         ctx.body = {
             party: newParty,
-            partyId: str
+            partyId: 'asd'
         };
     }
     catch (e) {
