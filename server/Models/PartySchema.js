@@ -15,7 +15,8 @@ let partyschema = new Schema({
     ownerName: { type: String },
     location: { type: Array },
     images: { type: Array },
-    publicationDate: { type: Number }
+    publicationDate: { type: Number },
+    vkLink: { type: String }
 });
 exports.PartySchema = mongoose.model('Party', partyschema);
 //# sourceMappingURL=PartySchema.js.map
