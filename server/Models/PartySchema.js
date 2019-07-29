@@ -14,6 +14,7 @@ let partyschema = new Schema({
     phone: { type: String },
     ownerName: { type: String },
     location: { type: Array },
+    vkLink: { type: String },
     images: { type: Array },
     publicationDate: { type: Number }
 });
