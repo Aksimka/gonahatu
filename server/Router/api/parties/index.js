@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Partiesrouter = require("koa-router");
+let randomString = require("randomstring");
 const Party_1 = require("../../../Controller/Classes/Party");
 const PartiesList_1 = require("../../../Controller/Classes/PartiesList");
 const FindPartyService_1 = require("../../../Controller/Services/FindPartyService");
@@ -38,8 +39,10 @@ PartiesRouter.post('/newParty', async (ctx, next) => {
     let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink } = ctx.request.body;
     let newParty = new Party_1.Party(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink);
     try {
+        newParty.save();
         ctx.body = {
-            party: newParty
+            party: newParty,
+            key: randomString.generate()
         };
     }
     catch (e) {
