@@ -24,14 +24,13 @@ PartiesRouter.post('/search', async (ctx, next) => {
     let offset = ctx.request.body.offset || null;
     let limit = ctx.request.body.limit || null;
     let conditions = ctx.request.body.conditions || [];
-    let orderBy = ctx.request.body.offset || [];
+    let orderBy = ctx.request.body.orderBy || {};
     try {
         ctx.body = await FindPartyService_1.FindPartyService.findPartiesByFields(offset, limit, conditions, orderBy);
     }
     catch (e) {
         ctx.body = `Error: /n ${e}`;
     }
-    ctx.body = 'search /api/parties here';
 });
 PartiesRouter.post('/newParty', async (ctx, next) => {
     console.log(ctx.request.body);
