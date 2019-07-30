@@ -23,13 +23,7 @@ app.use(logger('combined'));
 router.get('/', async (ctx) => {
     ctx.body = ctx;
 });
-app.use(function (ctx, next) {
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept-Type');
-    ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-    ctx.set('Access-Control-Allow-Credentials', 'true');
-    next();
-});
+app.use(cors({}));
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(apiRouter.routes());
