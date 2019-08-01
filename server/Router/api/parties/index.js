@@ -64,12 +64,12 @@ PartiesRouter.del('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
     let userKey = ctx.header['access-key'];
     let res = await Party_1.Party.delete(id, userKey);
-    if (res.id === id) {
-        ctx.status = 200;
+    if (res && res.id === +id) {
+        ctx.response.status = 200;
         ctx.body = 'Succesfully deleted';
     }
     else {
-        ctx.status = 500;
+        ctx.response.status = 500;
         ctx.body = res;
     }
 });
