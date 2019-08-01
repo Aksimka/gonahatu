@@ -34,13 +34,19 @@ PartiesRouter.post('/search', async (ctx, next) => {
 });
 PartiesRouter.post('/newParty', async (ctx, next) => {
     console.log(ctx.request.body);
-    let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink } = ctx.request.body;
+    let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink, userId } = ctx.request.body;
     let newParty = new Party_1.Party(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink);
+    if (!userId) {
+        ctx.body = 'userId is undefined';
+        ctx.response.status = 503;
+    }
     try {
-        newParty.save();
+        let userKey = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        newParty.save(userKey);
         ctx.body = {
             party: newParty,
-            partyId: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+            partyId: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+            userKey
         };
     }
     catch (e) {
@@ -60,10 +66,15 @@ PartiesRouter.put('/party/:id/newMember', async (ctx, next) => {
 });
 PartiesRouter.del('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
-    let res = await Party_1.Party.delete(id);
-    if (res.id = id) {
+    let userKey = ctx.header['access-key'];
+    let res = await Party_1.Party.delete(id, userKey);
+    if (res.id === id) {
         ctx.status = 200;
         ctx.body = 'Succesfully deleted';
+    }
+    else {
+        ctx.status = 500;
+        ctx.body = res;
     }
 });
 PartiesRouter.get('/map', async (ctx, next) => {

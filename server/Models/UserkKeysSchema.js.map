@@ -1,0 +1,1 @@
+{"version":3,"file":"UserkKeysSchema.js","sourceRoot":"","sources":["../../serverSrc/Models/UserkKeysSchema.ts"],"names":[],"mappings":";;AAAA,qCAAqC;AAErC,IAAI,MAAM,GAAG,QAAQ,CAAC,MAAM,CAAC;AAE7B,IAAI,cAAc,GAAG,IAAI,MAAM,CAAC;IAC5B,GAAG,EAAE,EAAC,IAAI,EAAE,MAAM,EAAC;CACtB,CAAC,CAAC;AAEU,QAAA,cAAc,GAAG,QAAQ,CAAC,KAAK,CAAC,UAAU,EAAE,cAAc,CAAC,CAAC"}

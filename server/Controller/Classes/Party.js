@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const PartySchema_1 = require("../../Models/PartySchema");
+const UserkKeysSchema_1 = require("../../Models/UserkKeysSchema");
 class Party {
     constructor(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink) {
         this.id = new Date().getTime() + 2;
@@ -18,7 +19,7 @@ class Party {
         this.publicationDate = publicationDate;
         this.vkLink = vkLink;
     }
-    save() {
+    save(key) {
         let newParty = new PartySchema_1.PartySchema({
             id: new Date().getTime() + 2,
             description: this.description,
@@ -39,6 +40,10 @@ class Party {
             if (err)
                 return 'Some error occurred';
         });
+        let userKey = new UserkKeysSchema_1.UserKeysSchema({
+            key
+        });
+        userKey.save();
     }
     static async oneMoreMember(id) {
         try {
@@ -56,12 +61,22 @@ class Party {
             return e;
         }
     }
-    static async delete(id) {
-        try {
-            return await PartySchema_1.PartySchema.findOneAndDelete({ id });
+    static async delete(id, key) {
+        let res = await UserkKeysSchema_1.UserKeysSchema.findOneAndDelete({ key });
+        if (res && res.key === key) {
+            try {
+                return await PartySchema_1.PartySchema.findOneAndDelete({ id });
+            }
+            catch (e) {
+                return e;
+            }
         }
-        catch (e) {
-            return e;
+        else {
+            return {
+                code: 500,
+                status: 'failed',
+                message: 'bad userKey'
+            };
         }
     }
 }
