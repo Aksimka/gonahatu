@@ -34,12 +34,8 @@ PartiesRouter.post('/search', async (ctx, next) => {
 });
 PartiesRouter.post('/newParty', async (ctx, next) => {
     console.log(ctx.request.body);
-    let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink, userId } = ctx.request.body;
+    let { description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink } = ctx.request.body;
     let newParty = new Party_1.Party(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink);
-    if (!userId) {
-        ctx.body = 'userId is undefined';
-        ctx.response.status = 503;
-    }
     try {
         let userKey = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         newParty.save(userKey);
