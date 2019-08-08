@@ -47,7 +47,6 @@ app.io.use((socket, next) => {
     }
     return next(error);
 });
-app.io.emit('hello', 'vlad lox');
 app.listen(process.env.PORT || 3000, function () {
     console.log(`server listening on http://localhost:${process.env.PORT || 3000}`);
 });
