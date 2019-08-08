@@ -49,6 +49,9 @@ PartiesRouter.post('/newParty', async (ctx, next) => {
         ctx.body = 'Doesn\'t added';
     }
 });
+PartiesRouter.post('/party/:id/report', async (ctx, next) => {
+    let id = ctx.params.id;
+});
 PartiesRouter.put('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
     let body = ctx.request.body;

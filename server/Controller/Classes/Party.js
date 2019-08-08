@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const PartySchema_1 = require("../../Models/PartySchema");
 const UserkKeysSchema_1 = require("../../Models/UserkKeysSchema");
+let MailParser = require("mailparser").MailParser;
+let mailparser = new MailParser();
 class Party {
     constructor(description, weWant, weHave, peopleNow, peopleMax, address, price, phone, ownerName, location, images, publicationDate, vkLink) {
         this.id = new Date().getTime() + 2;
@@ -62,6 +64,7 @@ class Party {
         }
     }
     static async delete(id, key) {
+        console.log(key);
         let res = await UserkKeysSchema_1.UserKeysSchema.findOneAndDelete({ key });
         if (res && res.key === key) {
             try {
@@ -78,6 +81,8 @@ class Party {
                 message: 'bad userKey'
             };
         }
+    }
+    static async report(id) {
     }
 }
 exports.Party = Party;
