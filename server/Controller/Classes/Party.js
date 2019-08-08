@@ -57,7 +57,7 @@ class Party {
     }
     static async update(id, body) {
         try {
-            return await PartySchema_1.PartySchema.updateOne({ id }, body);
+            return await PartySchema_1.PartySchema.findOneAndUpdate({ id }, { $set: JSON.parse(body) });
         }
         catch (e) {
             return e;

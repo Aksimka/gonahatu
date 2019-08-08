@@ -55,8 +55,18 @@ PartiesRouter.post('/party/:id/report', async (ctx, next) => {
 PartiesRouter.put('/party/:id', async (ctx, next) => {
     let id = ctx.params.id;
     let body = ctx.request.body;
-    let res = await Party_1.Party.update(id, body);
-    res.nModified ? ctx.body = 'Successfully' : ctx.response.status = 404;
+    try {
+        let res = await Party_1.Party.update(id, body);
+        if (res && res.id === +id) {
+            ctx.body = 'Successfully';
+        }
+        else
+            ctx.response.status = 404;
+    }
+    catch (e) {
+        ctx.response.status = 404;
+        console.log(e);
+    }
 });
 PartiesRouter.put('/party/:id/newMember', async (ctx, next) => {
     let id = ctx.params.id;
